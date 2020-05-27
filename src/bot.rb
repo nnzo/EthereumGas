@@ -1,8 +1,6 @@
 require 'telegram/bot'
 require 'json'
 require 'yaml'
-require 'net/http'
-require 'uri'
 require 'httparty'
 
 
@@ -29,15 +27,15 @@ isCalled = 0 # Never used before
 Thread.new do
   while true do
     puts Time.now
+    sleep 10 # Every 10 seconds, run the script again
     if isCalled == 0 # Check if it's been called in the last minute
       if getApi('safeLow').to_i <= 10 # Is safeLow lower than 10?
         $bott.api.send_message(chat_id: '-1001233948122', text: "Ethereum Gas is < 10 Gwei, start your miners!")
+        isCalled = 1 # Now say that we have called it
+        sleep 3600 # Next time we run the script will be in an hour
+        isCalled = 0 # Now tell the script text time it runs to execute everything
       end
-      isCalled = 1 # Now say that we have called it
-      sleep 3600 # Next time we run the script will be in an hour
-      isCalled = 0 # Now tell the script text time it runs to execute everything
     end
-    sleep 1 # Every 1 second, run the script again
   end
 end
 
