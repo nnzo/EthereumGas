@@ -20,7 +20,7 @@ telegramtoken, apikey = YAML.load(File.read("config.yaml"))
 #puts sv1
 
 def cGetGas(userid, bot)
-  bot.api.send_message(chat_id: userid, text: "Fast transaction price: #{getApi('fast')}\nSafe Low: #{getApi('safeLow')}")
+  bot.api.send_message(chat_id: userid, text: "Fast transaction price: #{getApi('fast')} GWEI\nSafe Low: #{getApi('safeLow')} GWEI")
 end
 
 isCalled = 0 # Never used before
@@ -33,7 +33,7 @@ Thread.new do
         $bott.api.send_message(chat_id: '-1001233948122', text: "Ethereum Gas is < 10 Gwei, start your miners!")
         isCalled = 1 # Now say that we have called it
         sleep 3600 # Next time we run the script will be in an hour
-        isCalled = 0 # Now tell the script text time it runs to execute everything
+        isCalled = 0 # Now tell the script next time it runs to execute everything
       end
     end
   end
